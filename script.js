@@ -14,10 +14,8 @@ card.addEventListener("click", () => {
   } else if (step === 2) {
     reveal.classList.add("show");
     reveal.setAttribute("aria-hidden", "false");
-    hint.textContent = "Sheeeesh. W boyfriend.";
+    hint.textContent = "W boyfriend.";
     reveal.scrollIntoView({ behavior: "smooth", block: "start" });
-  } else {
-    // do nothing
   }
 });
 
