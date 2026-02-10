@@ -15,7 +15,6 @@ card.addEventListener("click", () => {
     reveal.classList.add("show");
     reveal.setAttribute("aria-hidden", "false");
     hint.textContent = "Sheeeesh. W boyfriend.";
-    // scroll the reveal into view on mobile
     reveal.scrollIntoView({ behavior: "smooth", block: "start" });
   } else {
     // do nothing
@@ -28,6 +27,6 @@ reset.addEventListener("click", (e) => {
   card.classList.remove("is-open");
   reveal.classList.remove("show");
   reveal.setAttribute("aria-hidden", "true");
-  hint.textContent = "Click the card 💌";
+  hint.textContent = "Click the heart 💌";
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
