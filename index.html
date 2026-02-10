@@ -18,24 +18,14 @@
     </header>
 
     <section class="stage">
-      <div class="hint" id="hint">Click the card 💌</div>
+      <div class="hint" id="hint">Click the heart 💌</div>
 
-      <button class="card" id="card" type="button" aria-label="Open valentine card">
-        <div class="card-inner" id="cardInner">
-          <div class="card-front">
-            <div class="front-content">
-              <div class="stamp">💘</div>
-              <div class="front-text">
-                <div class="to">To my favorite person</div>
-                <div class="from">Love, <span id="yourNameFront">Andrew</span></div>
-              </div>
-              <div class="front-hearts">
-                <span>❤</span><span>❤</span><span>❤</span>
-              </div>
-            </div>
-          </div>
+      <button class="heart-card" id="card" type="button" aria-label="Open valentine heart card">
+        <div class="heart-shape" aria-hidden="true"></div>
 
-          <div class="card-back">
+        <div class="heart-stack">
+          <!-- INSIDE (stays put) -->
+          <div class="heart-face heart-inside">
             <div class="paper">
               <h2 class="paper-title">Hi <span id="herNameInside">Claire</span> 🥰</h2>
 
@@ -63,6 +53,20 @@
               <div class="cta-row">
                 <div class="small">Click once more</div>
                 <div class="arrow">👇</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FRONT (flips up from bottom) -->
+          <div class="heart-face heart-front">
+            <div class="front-content">
+              <div class="stamp">💘</div>
+              <div class="front-text">
+                <div class="to">To my favorite person</div>
+                <div class="from">Love, <span id="yourNameFront">Andrew</span></div>
+              </div>
+              <div class="front-hearts">
+                <span>❤</span><span>❤</span><span>❤</span>
               </div>
             </div>
           </div>
@@ -100,5 +104,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
