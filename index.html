@@ -9,22 +9,22 @@
 
 <body>
   <!-- Heart clip-path definition -->
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
-      <path d="
-        M 0.50 0.92
-        C 0.20 0.72, 0.02 0.52, 0.06 0.33
-        C 0.10 0.16, 0.27 0.07, 0.40 0.14
-        C 0.46 0.17, 0.49 0.22, 0.50 0.25
-        C 0.51 0.22, 0.54 0.17, 0.60 0.14
-        C 0.73 0.07, 0.90 0.16, 0.94 0.33
-        C 0.98 0.52, 0.80 0.72, 0.50 0.92
-        Z">
-      </path>
-    </clipPath>
-  </defs>
-</svg>
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+        <path d="
+          M 0.50 0.92
+          C 0.20 0.72, 0.02 0.52, 0.06 0.33
+          C 0.10 0.16, 0.27 0.07, 0.40 0.14
+          C 0.46 0.17, 0.49 0.22, 0.50 0.25
+          C 0.51 0.22, 0.54 0.17, 0.60 0.14
+          C 0.73 0.07, 0.90 0.16, 0.94 0.33
+          C 0.98 0.52, 0.80 0.72, 0.50 0.92
+          Z">
+        </path>
+      </clipPath>
+    </defs>
+  </svg>
 
   <div class="bg-hearts" aria-hidden="true"></div>
 
@@ -39,12 +39,10 @@
       <div class="hint" id="hint">Click the heart 💌</div>
 
       <button class="heart-card" id="card" type="button" aria-label="Open valentine heart card">
-        <div class="heart-shape" aria-hidden="true"></div>
-
         <div class="heart-stack">
-          <!-- INSIDE (stays put) -->
+          <!-- Inside (stays put) -->
           <div class="heart-face heart-inside">
-            <div class="paper">
+            <div class="inside-pad">
               <h2 class="paper-title">Hi <span id="herNameInside">Claire</span> 🥰</h2>
 
               <p class="paper-text" id="message1">
@@ -58,13 +56,13 @@
 
               <div class="photo-row">
                 <figure class="photo">
-                  <img src="/MissClaireValentine.github.io/Photos/photo1.jpg" alt="Us together 1" />
+                  <img src="Photos/photo1.jpg" alt="Us together 1" />
                 </figure>
                 <figure class="photo">
-                  <img src="/MissClaireValentine.github.io/Photos/photo2.jpg" alt="Us together 2" />
+                  <img src="Photos/photo2.jpg" alt="Us together 2" />
                 </figure>
                 <figure class="photo">
-                  <img src="/MissClaireValentine.github.io/Photos/photo3.jpg" alt="Us together 3" />
+                  <img src="Photos/photo3.jpg" alt="Us together 3" />
                 </figure>
               </div>
 
@@ -75,7 +73,7 @@
             </div>
           </div>
 
-          <!-- FRONT (flips up from bottom) -->
+          <!-- Front (flips up from bottom) -->
           <div class="heart-face heart-front">
             <div class="front-content">
               <div class="stamp">💘</div>
@@ -102,8 +100,8 @@
 
         <div class="chips">
           <span class="chip">💐 flowers</span>
-          <span class="chip">🍫 chocolate</span>
-          <span class="chip">🧸 Claire Bear</span>
+          <span class="chip">🍫 food</span>
+          <span class="chip">🧸 Yoga</span>
         </div>
 
         <p class="reveal-note">
@@ -122,4 +120,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
