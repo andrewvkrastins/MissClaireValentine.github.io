@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For Claire Bear 💘</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="bg-hearts" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <header class="top">
+      <div class="pill">Happy Valentine’s Day</div>
+      <h1 class="title">For <span id="herName">Claire</span> 💖</h1>
+      <p class="subtitle">A little website-card just for you.</p>
+    </header>
+
+    <section class="stage">
+      <div class="hint" id="hint">Click the card 💌</div>
+
+      <button class="card" id="card" type="button" aria-label="Open valentine card">
+        <div class="card-inner" id="cardInner">
+          <div class="card-front">
+            <div class="front-content">
+              <div class="stamp">💘</div>
+              <div class="front-text">
+                <div class="to">To my favorite person</div>
+                <div class="from">Love, <span id="yourNameFront">Andrew</span></div>
+              </div>
+              <div class="front-hearts">
+                <span>❤</span><span>❤</span><span>❤</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-back">
+            <div class="paper">
+              <h2 class="paper-title">Hi <span id="herNameInside">Claire</span> 🥰</h2>
+
+              <p class="paper-text" id="message1">
+                You make my life lighter, funnier, and better every single day.
+                I love you more than you know.
+              </p>
+
+              <p class="paper-text" id="message2">
+                I’m so grateful for you, and I can’t wait for all the memories we’re about to make.
+              </p>
+
+              <div class="photo-row">
+                <figure class="photo">
+                  <img src="photos/photo1.jpg" alt="Us together 1" />
+                </figure>
+                <figure class="photo">
+                  <img src="photos/photo2.jpg" alt="Us together 2" />
+                </figure>
+                <figure class="photo">
+                  <img src="photos/photo3.jpg" alt="Us together 3" />
+                </figure>
+              </div>
+
+              <div class="cta-row">
+                <div class="small">Click once more</div>
+                <div class="arrow">👇</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </button>
+    </section>
+
+    <section class="reveal" id="reveal" aria-hidden="true">
+      <div class="reveal-card">
+        <h2 class="reveal-title">What I got you 🎁</h2>
+        <p class="reveal-text" id="giftText">
+          I got you: <strong>your gift goes here</strong>.
+          And a big hug. And about 1,000 kisses.
+        </p>
+
+        <div class="chips">
+          <span class="chip">💐 flowers</span>
+          <span class="chip">🍫 chocolate</span>
+          <span class="chip">🧸 Claire Bear</span>
+        </div>
+
+        <p class="reveal-note">
+          PS: This is the “small” version. The anniversary version is going to be ridiculous.
+        </p>
+
+        <button class="reset" id="reset" type="button">Replay 💞</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Made with love by <span id="yourNameFooter">Andrew</span></span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
