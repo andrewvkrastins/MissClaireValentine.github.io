@@ -113,7 +113,9 @@ body{
 /* INSIDE LETTER */
 .paper{
   height:100%;
-  padding: 22px 22px;
+  padding: 18% 14% 14% 14%;
+  text-align:center;
+
   display:flex;
   flex-direction:column;
   gap: 10px;
@@ -152,7 +154,7 @@ body{
 
 .photo img{
   width:100%;
-  height: 110px;
+  height: 90px;
   object-fit:cover;
   display:block;
 }
@@ -263,8 +265,8 @@ body{
   background:transparent;
   padding:0;
   cursor:pointer;
-  width: min(640px, 94vw);
-  height: 460px;
+  width: min(780px, 96vw);
+  height: min(700px, 90vh);
   perspective: 1600px;
   position:relative;
 }
@@ -278,8 +280,8 @@ body{
 
 .heart-face{
   position:absolute;
-  width: min(540px, 92vw);
-  height: 400px;
+  width: min(760px, 95vw);
+  height: min(640px, 85vh);
   transform-style: preserve-3d;
   backface-visibility: hidden;
   box-shadow: var(--shadow);
@@ -289,17 +291,15 @@ body{
 }
 
 .heart-front{
-  background:
-    radial-gradient(900px 420px at 30% 12%, rgba(255,77,136,.24), transparent 60%),
-    linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,230,239,.96));
-  border: 1px solid rgba(255,77,136,.18);
+  background:linear-gradient(160deg, #ff9fbd, #ff6fa0);
+  border: 2px solid #ff4d88;
   transform-origin: 50% 100%;
   transform: rotateX(0deg);
   transition: transform 900ms cubic-bezier(.2,.8,.2,1);
 }
 
 .heart-inside{
-  background: rgba(255,255,255,.92);
+  background: #fff0f6;
   border: 1px solid rgba(255,77,136,.16);
 }
 
@@ -329,4 +329,5 @@ body{
     padding: 18px 18px;
   }
 }
+
 
