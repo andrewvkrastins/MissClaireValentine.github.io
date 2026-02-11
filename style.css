@@ -58,13 +58,14 @@ body{
   color: var(--muted);
 }
 
+/* moved heart upward */
 .stage{
   position:relative;
   display:flex;
   justify-content:center;
-  align-items:center;
-  padding: 18px 0 8px;
-  min-height: 980px;
+  align-items:flex-start;
+  padding: 10px 0 0px;
+  min-height: 780px;
 }
 
 .hint{
@@ -87,7 +88,7 @@ body{
   font-weight: 600;
 }
 
-/* Floating soft blobs background */
+/* soft background blobs */
 .bg-hearts{
   position:fixed;
   inset:0;
@@ -99,9 +100,7 @@ body{
     radial-gradient(circle at 44% 86%, rgba(255,77,136,.12) 0 20%, transparent 21%);
 }
 
-/* =========================
-   HEART CARD (bigger)
-   ========================= */
+/* HEART CARD BIGGER + TALLER */
 
 .heart-card{
   appearance:none;
@@ -111,7 +110,7 @@ body{
   cursor:pointer;
 
   width: min(1180px, 98vw);
-  height: min(1040px, 95vh);
+  height: min(1220px, 98vh);
   perspective: 1800px;
 
   display:grid;
@@ -121,7 +120,7 @@ body{
 .heart-stack{
   position:relative;
   width: min(1120px, 98vw);
-  height: min(960px, 92vh);
+  height: min(1150px, 96vh);
 }
 
 .heart-face{
@@ -152,10 +151,10 @@ body{
   transform: rotateX(-165deg);
 }
 
-/* FRONT text centered */
+/* front text centered */
 .front-content{
   height:100%;
-  padding: 18% 12% 14% 12%;
+  padding: 20% 12% 16% 12%;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -165,13 +164,13 @@ body{
 .front-center{
   display:flex;
   flex-direction:column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .front-title{
   font-weight: 950;
   letter-spacing: .2px;
-  font-size: clamp(40px, 5vw, 72px);
+  font-size: clamp(42px, 5vw, 74px);
   color: #2b1b24;
   text-shadow: 0 10px 24px rgba(0,0,0,.12);
 }
@@ -187,10 +186,10 @@ body{
   font-size: clamp(18px, 2.2vw, 26px);
 }
 
-/* INSIDE layout tuned to fit heart curves */
+/* inside spacing adjusted for taller heart */
 .inside-pad{
   height:100%;
-  padding: 18% 12% 12% 12%;
+  padding: 22% 12% 14% 12%;
   display:flex;
   flex-direction:column;
   gap: 12px;
@@ -209,7 +208,7 @@ body{
   font-size: clamp(16px, 2.2vw, 22px);
 }
 
-/* Photos */
+/* photos */
 .photo-row{
   margin-top: 10px;
   display:grid;
@@ -234,7 +233,6 @@ body{
   display:block;
 }
 
-/* CTA inside */
 .cta-row{
   margin-top:auto;
   display:flex;
@@ -243,13 +241,11 @@ body{
   gap: 10px;
   color: var(--muted);
 }
+
 .arrow{font-size: 20px}
 .small{font-weight: 800}
 
-/* =========================
-   REVEAL
-   ========================= */
-
+/* reveal section */
 .reveal{
   display:none;
   justify-content:center;
@@ -312,13 +308,4 @@ body{
   border-radius: 14px;
   cursor:pointer;
   box-shadow: 0 12px 26px rgba(255,77,136,.22);
-}
-
-/* Mobile adjustments */
-@media (max-width: 560px){
-  .stage{ min-height: 980px; }
-  .photo-row{ grid-template-columns: 1fr; }
-  .photo img{ height: 170px; }
-  .front-content{ padding: 24% 12% 14% 12%; }
-  .inside-pad{ padding: 26% 12% 14% 12%; }
 }
