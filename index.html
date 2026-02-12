@@ -32,7 +32,7 @@
     <header class="top">
       <div class="pill">Happy Valentine’s Day</div>
       <h1 class="title">For <span id="herName">Claire</span> 💖</h1>
-      <p class="subtitle">A little website-card just for you.</p>
+      <p class="subtitle">Open your card.</p>
     </header>
 
     <section class="stage">
@@ -40,40 +40,93 @@
 
       <button class="heart-card" id="card" type="button" aria-label="Open valentine heart card">
         <div class="heart-stack">
-          <!-- Inside (stays put) -->
+
+          <!-- Inside -->
           <div class="heart-face heart-inside">
             <div class="inside-pad">
-              <h2 class="paper-title">Hi <span id="herNameInside">Claire</span> 🥰</h2>
 
-              <p class="paper-text" id="message1">
-                You make my life lighter, funnier, and better every single day.
-                I love you more than you know.
-              </p>
+              <div class="slider">
+                <div class="slides" id="slides">
 
-              <p class="paper-text" id="message2">
-                I’m so grateful for you, and I can’t wait for all the memories we’re about to make.
-              </p>
+                  <!-- Slide 1 -->
+                  <section class="slide is-active">
+                    <h2 class="paper-title">Hi Claire 🥰</h2>
+                    <p class="paper-text">
+                      I’m sorry we aren’t together on Valentine’s Day, so I made you this little website card.
+                    </p>
+                    <p class="paper-text">
+                      It’s basically me trying to be cute from far away.
+                    </p>
+                  </section>
 
-              <div class="photo-row">
-                <figure class="photo">
-                  <img src="Photos/photo1.jpg" alt="Us together 1" />
-                </figure>
-                <figure class="photo">
-                  <img src="Photos/photo2.jpg" alt="Us together 2" />
-                </figure>
-                <figure class="photo">
-                  <img src="Photos/photo3.jpg" alt="Us together 3" />
-                </figure>
+                  <!-- Slide 2 -->
+                  <section class="slide">
+                    <h2 class="paper-title">I appreciate you</h2>
+                    <p class="paper-text">
+                      You make me so happy. You’re my favorite person, and I’m grateful for you every day.
+                      I love the way you make everything feel lighter.
+                    </p>
+                    <p class="paper-text">
+                      Here are some of my favorite pictures of us.
+                    </p>
+                  </section>
+
+                  <!-- Slide 3 (2 pics) -->
+                  <section class="slide">
+                    <h2 class="paper-title">Us 💞</h2>
+                    <div class="photo-row two">
+                      <figure class="photo"><img src="Photos/photo1.jpg" alt="Photo 1" /></figure>
+                      <figure class="photo"><img src="Photos/photo2.jpg" alt="Photo 2" /></figure>
+                    </div>
+                  </section>
+
+                  <!-- Slide 4 (1 pic) -->
+                  <section class="slide">
+                    <h2 class="paper-title">One of my favorites</h2>
+                    <div class="photo-row one">
+                      <figure class="photo"><img src="Photos/photo3.jpg" alt="Photo 3" /></figure>
+                    </div>
+                  </section>
+
+                  <!-- Slide 5 (2 pics placeholders using same files for now) -->
+                  <section class="slide">
+                    <h2 class="paper-title">More us</h2>
+                    <div class="photo-row two">
+                      <figure class="photo"><img src="Photos/photo1.jpg" alt="Photo 4" /></figure>
+                      <figure class="photo"><img src="Photos/photo2.jpg" alt="Photo 5" /></figure>
+                    </div>
+                    <p class="paper-text small-note">
+                      Swap these with other pics later.
+                    </p>
+                  </section>
+
+                  <!-- Slide 6 final note -->
+                  <section class="slide">
+                    <h2 class="paper-title">One last thing</h2>
+                    <p class="paper-text">
+                      I love you, and I can’t wait until we’re together again.
+                    </p>
+                    <p class="paper-text big-deal">
+                      Click next. I made this part a big deal 😤🎁
+                    </p>
+                  </section>
+
+                </div>
+
+                <div class="slider-controls">
+                  <button class="nav-btn" id="prevSlide" type="button">Back</button>
+
+                  <div class="dots" id="dots" aria-hidden="true"></div>
+
+                  <button class="nav-btn primary" id="nextSlide" type="button">Next</button>
+                </div>
+
               </div>
 
-              <div class="cta-row">
-                <div class="small">Click once more</div>
-                <div class="arrow">👇</div>
-              </div>
             </div>
           </div>
 
-          <!-- Front (flips up from bottom) -->
+          <!-- Front -->
           <div class="heart-face heart-front">
             <div class="front-content">
               <div class="front-center">
@@ -82,26 +135,19 @@
               </div>
             </div>
           </div>
+
         </div>
       </button>
     </section>
 
     <section class="reveal" id="reveal" aria-hidden="true">
       <div class="reveal-card">
-        <h2 class="reveal-title">What I got you 🎁</h2>
+        <h2 class="reveal-title">Your gift 🎁</h2>
         <p class="reveal-text" id="giftText">
-          I got you: <strong>your gift goes here</strong>.
-          And a big hug. And about 1,000 kisses.
+          I got you: <strong>put gift details here</strong>.
         </p>
-
-        <div class="chips">
-          <span class="chip">💐 flowers</span>
-          <span class="chip">🍫 chocolate</span>
-          <span class="chip">🧸 Claire Bear</span>
-        </div>
-
         <p class="reveal-note">
-          PS: This is the “small” version. The anniversary version is going to be ridiculous.
+          Yes, I’m serious. Yes, you deserve it.
         </p>
 
         <button class="reset" id="reset" type="button">Replay 💞</button>
@@ -109,7 +155,7 @@
     </section>
 
     <footer class="footer">
-      <span>Made with love by <span id="yourNameFooter">Andrew</span></span>
+      <span>Made with love by Andrew</span>
     </footer>
   </main>
 
