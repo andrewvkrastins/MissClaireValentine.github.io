@@ -373,7 +373,8 @@ body{
   .photo img{ height: 260px; }
   .front-content{ padding: 24% 12% 14% 12%; }
   .inside-pad{ padding: 26% 12% 14% 12%; }
-}
+
+.heart-card{ cursor:pointer; }
 .heart-front{ pointer-events:auto; }
 .heart-card.is-open .heart-front{ pointer-events:none; }
 
