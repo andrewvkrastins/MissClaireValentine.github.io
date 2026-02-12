@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Miss Claire ❤</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=8" />
 </head>
 
 <body>
@@ -96,7 +96,7 @@
                       I love you, and I can’t wait until we’re together again.
                     </p>
                     <p class="paper-text big-deal typewriter">
-                      Click the heart one more time to reveal your gift 😤🎁
+                      Click the heart one more time. Here’s the plan 😤🎁
                     </p>
                   </section>
 
@@ -124,11 +124,51 @@
       </div>
     </section>
 
+    <!-- Gift popup with itinerary slides -->
     <section class="reveal" id="reveal" aria-hidden="true">
-      <div class="reveal-card">
-        <h2 class="reveal-title">Your gift 🎁</h2>
-        <p class="reveal-text typewriter" id="giftText">I got you: <strong>put gift details here</strong>.</p>
-        <p class="reveal-note typewriter">Yes, I’m serious. Yes, you deserve it.</p>
+      <div class="reveal-card reveal-big" role="dialog" aria-label="Gift reveal">
+        <div class="reveal-top">
+          <h2 class="reveal-title">Ok so here’s our Valentine’s Day 💘</h2>
+          <p class="reveal-note typewriter">Not the exact day, but the exact vibe.</p>
+        </div>
+
+        <div class="gift-slider" id="giftSlider">
+          <div class="gift-slide is-active">
+            <div class="gift-emoji">🧘‍♀️</div>
+            <h3 class="gift-h">Hot yoga</h3>
+            <p class="gift-p">Morning class together. Stretch. Sweat. Laugh at me struggling.</p>
+            <div class="gift-photo one">
+              <img src="Photos/gift1.jpg" alt="Gift photo 1" />
+            </div>
+            <p class="gift-small">If you do not add gift photos, you can delete the img tags or keep them and upload later.</p>
+          </div>
+
+          <div class="gift-slide">
+            <div class="gift-emoji">🥐</div>
+            <h3 class="gift-h">Breakfast or lunch</h3>
+            <p class="gift-p">Then I’m taking you out to eat. Your choice. I’m paying. No debate.</p>
+            <div class="gift-photo one">
+              <img src="Photos/gift2.jpg" alt="Gift photo 2" />
+            </div>
+          </div>
+
+          <div class="gift-slide">
+            <div class="gift-emoji">🌷</div>
+            <h3 class="gift-h">Flowers</h3>
+            <p class="gift-p">And flowers. Because obviously.</p>
+            <div class="gift-photo one">
+              <img src="Photos/gift3.jpg" alt="Gift photo 3" />
+            </div>
+            <p class="gift-p gift-bold">I love you, Claire Bear.</p>
+          </div>
+        </div>
+
+        <div class="gift-controls">
+          <button class="nav-btn" id="giftPrev" type="button">Back</button>
+          <div class="dots" id="giftDots" aria-hidden="true"></div>
+          <button class="nav-btn primary" id="giftNext" type="button">Next</button>
+        </div>
+
         <button class="reset" id="reset" type="button">Replay 💞</button>
       </div>
     </section>
@@ -138,6 +178,6 @@
     </footer>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>
