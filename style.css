@@ -457,3 +457,21 @@ body{
   .front-content{ padding: 24% 12% 14% 12%; }
   .inside-pad{ padding: 26% 12% 14% 12%; }
 }
+
+/* Better fit for the single "favorite" photo slide */
+.favorite-fit{
+  margin-top: 14px;
+}
+
+.photo.photo-fit{
+  width: min(820px, 94%);
+  margin: 0 auto;
+  border-radius: 20px;
+  background: rgba(255,255,255,.65);
+}
+
+.photo.photo-fit img{
+  height: 420px;
+  object-fit: contain;
+  background: rgba(255,77,136,.06);
+}
