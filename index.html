@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- Heart clip-path definition -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
       <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
@@ -32,20 +31,17 @@
     <header class="top">
       <div class="pill">Happy Valentine’s Day</div>
       <h1 class="title">For <span id="herName">Claire</span> 💖</h1>
-      <p class="subtitle">Open your card.</p>
+      <p class="subtitle">Click the heart to open, then keep clicking to turn pages.</p>
     </header>
 
     <section class="stage">
       <div class="hint" id="hint">Click the heart 💌</div>
 
-      <!-- IMPORTANT: this is now a DIV, not a button -->
       <div class="heart-card" id="card" role="button" tabindex="0" aria-label="Open valentine heart card">
         <div class="heart-stack">
 
-          <!-- Inside -->
           <div class="heart-face heart-inside">
             <div class="inside-pad">
-
               <div class="slider">
                 <div class="slides" id="slides">
 
@@ -91,9 +87,7 @@
                       <figure class="photo"><img src="Photos/photo1.jpg" alt="Photo 4" /></figure>
                       <figure class="photo"><img src="Photos/photo2.jpg" alt="Photo 5" /></figure>
                     </div>
-                    <p class="paper-text small-note">
-                      Swap these with other pics later.
-                    </p>
+                    <p class="paper-text small-note">Swap these with other pics later.</p>
                   </section>
 
                   <section class="slide">
@@ -102,7 +96,7 @@
                       I love you, and I can’t wait until we’re together again.
                     </p>
                     <p class="paper-text big-deal">
-                      Click next. I made this part a big deal 😤🎁
+                      Click the heart one more time to reveal your gift 😤🎁
                     </p>
                   </section>
 
@@ -113,18 +107,15 @@
                   <div class="dots" id="dots" aria-hidden="true"></div>
                   <button class="nav-btn primary" id="nextSlide" type="button">Next</button>
                 </div>
-
               </div>
-
             </div>
           </div>
 
-          <!-- Front cover -->
           <div class="heart-face heart-front" id="frontCover">
             <div class="front-content">
               <div class="front-center">
                 <div class="front-title">Miss Claire <span class="front-heart">❤</span></div>
-                <div class="front-sub">Love, <span id="yourNameFront">Andrew</span></div>
+                <div class="front-sub">Love, Andrew</div>
               </div>
             </div>
           </div>
@@ -136,11 +127,8 @@
     <section class="reveal" id="reveal" aria-hidden="true">
       <div class="reveal-card">
         <h2 class="reveal-title">Your gift 🎁</h2>
-        <p class="reveal-text" id="giftText">
-          I got you: <strong>put gift details here</strong>.
-        </p>
+        <p class="reveal-text">I got you: <strong>put gift details here</strong>.</p>
         <p class="reveal-note">Yes, I’m serious. Yes, you deserve it.</p>
-
         <button class="reset" id="reset" type="button">Replay 💞</button>
       </div>
     </section>
