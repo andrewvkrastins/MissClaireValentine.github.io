@@ -1,6 +1,7 @@
 let opened = false;
 
 const card = document.getElementById("card");
+const frontCover = document.getElementById("frontCover");
 const hint = document.getElementById("hint");
 const reveal = document.getElementById("reveal");
 const reset = document.getElementById("reset");
@@ -26,24 +27,32 @@ function showSlide(idx) {
   slides.forEach((s, idx2) => s.classList.toggle("is-active", idx2 === i));
 
   prevBtn.disabled = (i === 0);
-
-  if (i === slides.length - 1) {
-    nextBtn.textContent = "Reveal gift 🎁";
-  } else {
-    nextBtn.textContent = "Next";
-  }
+  nextBtn.textContent = (i === slides.length - 1) ? "Reveal gift 🎁" : "Next";
 
   renderDots();
 }
 
-card.addEventListener("click", () => {
+function openCard() {
   if (opened) return;
   opened = true;
 
   card.classList.add("is-open");
   hint.textContent = "Use Next inside the heart 💗";
-
   showSlide(0);
+
+  // After open, the front cover should not block clicks
+  frontCover.style.pointerEvents = "none";
+}
+
+card.addEventListener("click", () => {
+  openCard();
+});
+
+card.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    openCard();
+  }
 });
 
 prevBtn.addEventListener("click", (e) => {
@@ -73,6 +82,9 @@ reset.addEventListener("click", (e) => {
   reveal.classList.remove("show");
   reveal.setAttribute("aria-hidden", "true");
   hint.textContent = "Click the heart 💌";
+
+  // re-enable cover clicks after reset
+  frontCover.style.pointerEvents = "auto";
 
   showSlide(0);
   window.scrollTo({ top: 0, behavior: "smooth" });
