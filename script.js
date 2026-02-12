@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("nextSlide");
   const dotsWrap = document.getElementById("dots");
 
-  // Gift slider elements
   const giftSlides = Array.from(document.querySelectorAll(".gift-slide"));
   const giftPrev = document.getElementById("giftPrev");
   const giftNext = document.getElementById("giftNext");
@@ -60,24 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function setNextLabel() {
-    nextBtn.textContent = (i === slides.length - 1) ? "Reveal plan 🎁" : "Next";
-  }
-
-  function showSlide(idx, options = {}) {
-    i = Math.max(0, Math.min(slides.length - 1, idx));
-    slides.forEach((s, idx2) => s.classList.toggle("is-active", idx2 === i));
-    prevBtn.disabled = (i === 0);
-    setNextLabel();
-    renderDots(dotsWrap, slides.length, i);
-
-    if (!options.skipTypewriter) typeCurrentSlide();
-  }
-
-  function getTypeTargets(container) {
-    return Array.from(container.querySelectorAll(".typewriter"));
-  }
-
   async function typeElement(el, speed, token) {
     const full = (el.dataset.full ?? el.textContent).trim();
     if (!el.dataset.full) el.dataset.full = full;
@@ -101,25 +82,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     for (const el of targets) {
-      const speed = el.classList.contains("paper-title") ? 14 : 12;
+      const speed = (el.tagName === "H2" || el.tagName === "H3") ? 14 : 12;
       await typeElement(el, speed, token);
       await new Promise(r => setTimeout(r, 140));
       if (token !== typeToken) return;
     }
   }
 
-  function typeCurrentSlide() {
-    const active = slides[i];
-    const targets = getTypeTargets(active);
+  function typeWithin(container) {
+    const targets = Array.from(container.querySelectorAll(".typewriter"));
     if (targets.length === 0) return;
     typeTargets(targets);
   }
 
-  function typeGiftSlide() {
-    const active = giftSlides[giftIndex];
-    const targets = getTypeTargets(active);
-    if (targets.length === 0) return;
-    typeTargets(targets);
+  function setNextLabel() {
+    nextBtn.textContent = (i === slides.length - 1) ? "Reveal plan 🎁" : "Next";
+  }
+
+  function showSlide(idx, opts = {}) {
+    i = Math.max(0, Math.min(slides.length - 1, idx));
+    slides.forEach((s, k) => s.classList.toggle("is-active", k === i));
+    prevBtn.disabled = (i === 0);
+    setNextLabel();
+    renderDots(dotsWrap, slides.length, i);
+
+    if (!opts.skipTypewriter) typeWithin(slides[i]);
   }
 
   function openCard() {
@@ -141,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     giftNext.textContent = (giftIndex === giftSlides.length - 1) ? "Done 💘" : "Next";
 
     renderDots(giftDots, giftSlides.length, giftIndex);
-    typeGiftSlide();
+    typeWithin(giftSlides[giftIndex]);
   }
 
   function revealGift() {
@@ -154,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     giftIndex = 0;
     showGiftSlide(0);
 
+    typeWithin(reveal);
     reveal.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -162,12 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
       openCard();
       return;
     }
-
     if (i >= slides.length - 1) {
       revealGift();
       return;
     }
-
     showSlide(i + 1, { skipTypewriter: false });
   }
 
@@ -219,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
     frontCover.style.pointerEvents = "auto";
 
     typeToken += 1;
-
     document.querySelectorAll(".typewriter").forEach(el => {
       if (el.dataset.full) el.textContent = el.dataset.full;
     });
@@ -230,7 +215,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // init
   showSlide(0, { skipTypewriter: true });
-  if (giftSlides.length > 0) {
-    renderDots(giftDots, giftSlides.length, 0);
-  }
+  renderDots(giftDots, giftSlides.length, 0);
 });
