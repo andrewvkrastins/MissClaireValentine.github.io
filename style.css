@@ -115,6 +115,16 @@ body{
   place-items:center;
 }
 
+/* pulse while closed */
+.heart-card:not(.is-open){
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.03); }
+  100%{ transform: scale(1); }
+}
+
 .heart-stack{
   position:relative;
   width: min(1120px, 98vw);
@@ -138,6 +148,8 @@ body{
   transform-origin: 50% 100%;
   transform: rotateX(0deg);
   transition: transform 900ms cubic-bezier(.2,.8,.2,1);
+
+  pointer-events:auto;
 }
 
 .heart-inside{
@@ -147,6 +159,7 @@ body{
 
 .heart-card.is-open .heart-front{
   transform: rotateX(-165deg);
+  pointer-events:none;
 }
 
 /* Front centered text */
@@ -236,6 +249,22 @@ body{
 
 .paper-text.big-deal{
   font-weight: 900;
+}
+
+/* Typewriter cursor */
+.typewriter::after{
+  content:"";
+  display:inline-block;
+  width: 10px;
+  margin-left: 4px;
+  border-right: 2px solid rgba(43,27,36,.55);
+  transform: translateY(2px);
+  animation: blink 900ms infinite;
+}
+@keyframes blink{
+  0%{ opacity:1; }
+  50%{ opacity:0; }
+  100%{ opacity:1; }
 }
 
 /* Photos */
@@ -367,14 +396,31 @@ body{
   box-shadow: 0 12px 26px rgba(255,77,136,.22);
 }
 
+/* Confetti */
+.confetti{
+  position:fixed;
+  top:-16px;
+  width: 10px;
+  height: 16px;
+  border-radius: 3px;
+  z-index: 9999;
+  will-change: transform, opacity;
+  animation-name: confettiFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confettiFall{
+  to{
+    transform: translate3d(var(--dx), 110vh, 0) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
 /* Mobile */
 @media (max-width: 560px){
   .photo-row.two{ grid-template-columns: 1fr; }
   .photo img{ height: 260px; }
   .front-content{ padding: 24% 12% 14% 12%; }
   .inside-pad{ padding: 26% 12% 14% 12%; }
-
-.heart-card{ cursor:pointer; }
-.heart-front{ pointer-events:auto; }
-.heart-card.is-open .heart-front{ pointer-events:none; }
-
+}
