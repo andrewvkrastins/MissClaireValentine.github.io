@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lovePopTimer) clearTimeout(lovePopTimer);
     lovePopTimer = setTimeout(() => {
       el.classList.remove("show");
-    }, 2000);
+    }, 4500);
   }
 
   function rand(min, max) {
@@ -385,5 +385,6 @@ document.addEventListener("DOMContentLoaded", () => {
   showSlide(0, { skipTypewriter: true });
   renderDots(giftDots, giftSlides.length, 0);
 });
+
 
 
