@@ -21,6 +21,41 @@ document.addEventListener("DOMContentLoaded", () => {
   let giftIndex = 0;
   let typeToken = 0;
 
+  // fullscreen pop state
+  let lovePopTimer = null;
+  let lovePopEl = null;
+
+  function ensureLovePop() {
+    if (lovePopEl) return lovePopEl;
+
+    const wrap = document.createElement("div");
+    wrap.className = "love-pop";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.innerHTML = `<div class="love-text"></div>`;
+    document.body.appendChild(wrap);
+
+    lovePopEl = wrap;
+    return wrap;
+  }
+
+  function showLovePop(text) {
+    const el = ensureLovePop();
+    const textEl = el.querySelector(".love-text");
+
+    textEl.textContent = text;
+
+    // reset animation by forcing reflow
+    el.classList.remove("show");
+    void el.offsetHeight;
+
+    el.classList.add("show");
+
+    if (lovePopTimer) clearTimeout(lovePopTimer);
+    lovePopTimer = setTimeout(() => {
+      el.classList.remove("show");
+    }, 2000);
+  }
+
   function rand(min, max) {
     return Math.random() * (max - min) + min;
   }
@@ -66,10 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
     el.textContent = "";
 
     for (let idx = 0; idx < full.length; idx++) {
-      if (token !== typeToken) return;
+      if (token !== typeToken) return false;
       el.textContent += full[idx];
       await new Promise(r => setTimeout(r, speed));
     }
+
+    if (token !== typeToken) return false;
+    return true;
   }
 
   async function typeTargets(targets) {
@@ -82,10 +120,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     for (const el of targets) {
-      const speed = (el.tagName === "H2" || el.tagName === "H3") ? 14 : 12;
-      await typeElement(el, speed, token);
+      // base speeds
+      let speed = (el.tagName === "H2" || el.tagName === "H3") ? 14 : 12;
+
+      // allow per-element overrides
+      if (el.dataset.speed) {
+        const s = parseInt(el.dataset.speed, 10);
+        if (!Number.isNaN(s)) speed = s;
+      }
+
+      const finished = await typeElement(el, speed, token);
       await new Promise(r => setTimeout(r, 140));
+
+      if (!finished) return;
       if (token !== typeToken) return;
+
+      // SPECIAL pop behavior
+      if (el.dataset.pop === "true") {
+        showLovePop(el.dataset.full || el.textContent);
+      }
     }
   }
 
@@ -204,7 +257,14 @@ document.addEventListener("DOMContentLoaded", () => {
     hint.textContent = "Click the heart 💌";
     frontCover.style.pointerEvents = "auto";
 
+    // stop typing
     typeToken += 1;
+
+    // stop fullscreen pop if active
+    if (lovePopTimer) clearTimeout(lovePopTimer);
+    if (lovePopEl) lovePopEl.classList.remove("show");
+
+    // restore original text for typewriter
     document.querySelectorAll(".typewriter").forEach(el => {
       if (el.dataset.full) el.textContent = el.dataset.full;
     });
