@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await sleep(speed);
       }
 
-      await sleep(450);
+      await sleep(1000);
       if (token !== typeToken) return false;
 
       // backspace wrong part
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let b = 0; b < backCount; b++) {
         if (token !== typeToken) return false;
         el.textContent = el.textContent.slice(0, -1);
-        await sleep(45);
+        await sleep(100);
       }
 
       await sleep(120);
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let t = 0; t < toText.length; t++) {
         if (token !== typeToken) return false;
         el.textContent += toText[t];
-        await sleep(55);
+        await sleep(145);
       }
 
       // keep final text for replay restores
@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function revealGift() {
     showLoading();
-    await sleep(2600);
+    await sleep(5000);
     hideLoading();
 
     reveal.classList.add("show");
@@ -385,4 +385,5 @@ document.addEventListener("DOMContentLoaded", () => {
   showSlide(0, { skipTypewriter: true });
   renderDots(giftDots, giftSlides.length, 0);
 });
+
 
