@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("nextSlide");
   const dotsWrap = document.getElementById("dots");
 
+  // Gift slider
   const giftSlides = Array.from(document.querySelectorAll(".gift-slide"));
   const giftPrev = document.getElementById("giftPrev");
   const giftNext = document.getElementById("giftNext");
@@ -24,6 +25,54 @@ document.addEventListener("DOMContentLoaded", () => {
   // fullscreen pop state
   let lovePopTimer = null;
   let lovePopEl = null;
+
+  // welcome back
+  const welcomeBackEl = document.getElementById("welcomeBack");
+  if (welcomeBackEl) {
+    const seen = localStorage.getItem("claireCardSeen") === "1";
+    welcomeBackEl.textContent = seen ? "welcome back 💕" : "";
+  }
+
+  // loading overlay
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  function sleep(ms) {
+    return new Promise(r => setTimeout(r, ms));
+  }
+
+  function showLoading() {
+    if (!loadingOverlay) return;
+    loadingOverlay.classList.add("show");
+    loadingOverlay.setAttribute("aria-hidden", "false");
+  }
+
+  function hideLoading() {
+    if (!loadingOverlay) return;
+    loadingOverlay.classList.remove("show");
+    loadingOverlay.setAttribute("aria-hidden", "true");
+  }
+
+  // subtle heart cursor trail
+  let lastTrail = 0;
+  document.addEventListener("pointermove", (e) => {
+    const now = Date.now();
+    if (now - lastTrail < 70) return;
+    lastTrail = now;
+
+    const h = document.createElement("div");
+    h.className = "trail-heart";
+    h.textContent = "❤";
+    h.style.left = e.clientX + "px";
+    h.style.top = e.clientY + "px";
+
+    const size = 10 + Math.random() * 10;
+    h.style.fontSize = size + "px";
+    h.style.opacity = (0.22 + Math.random() * 0.18).toFixed(2);
+    h.style.color = "rgba(255,77,136,.95)";
+
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 950);
+  });
 
   function ensureLovePop() {
     if (lovePopEl) return lovePopEl;
@@ -86,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderDots(wrap, total, active) {
+    if (!wrap) return;
     wrap.innerHTML = "";
     for (let idx = 0; idx < total; idx++) {
       const d = document.createElement("div");
@@ -103,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let idx = 0; idx < full.length; idx++) {
       if (token !== typeToken) return false;
       el.textContent += full[idx];
-      await new Promise(r => setTimeout(r, speed));
+      await sleep(speed);
     }
 
     if (token !== typeToken) return false;
@@ -119,23 +169,70 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = "";
     });
 
+    async function typeWithTypo(el, speed) {
+      const finalText = (el.dataset.full || "").trim();
+      const startText = (el.dataset.typoStart || finalText).trim();
+      const fromText = (el.dataset.typoFrom || "").trim();
+      const toText = (el.dataset.typoTo || "").trim();
+
+      el.textContent = "";
+
+      // type the "mistake"
+      for (let k = 0; k < startText.length; k++) {
+        if (token !== typeToken) return false;
+        el.textContent += startText[k];
+        await sleep(speed);
+      }
+
+      await sleep(260);
+      if (token !== typeToken) return false;
+
+      // backspace wrong part
+      const backCount = fromText.length || 0;
+      for (let b = 0; b < backCount; b++) {
+        if (token !== typeToken) return false;
+        el.textContent = el.textContent.slice(0, -1);
+        await sleep(18);
+      }
+
+      await sleep(120);
+      if (token !== typeToken) return false;
+
+      // type corrected part
+      for (let t = 0; t < toText.length; t++) {
+        if (token !== typeToken) return false;
+        el.textContent += toText[t];
+        await sleep(22);
+      }
+
+      // keep final text for replay restores
+      el.dataset.full = finalText || el.textContent.trim();
+
+      return true;
+    }
+
     for (const el of targets) {
-      // base speeds
       let speed = (el.tagName === "H2" || el.tagName === "H3") ? 14 : 12;
 
-      // allow per-element overrides
       if (el.dataset.speed) {
         const s = parseInt(el.dataset.speed, 10);
         if (!Number.isNaN(s)) speed = s;
       }
 
-      const finished = await typeElement(el, speed, token);
-      await new Promise(r => setTimeout(r, 140));
+      let finished = false;
+
+      if (el.dataset.typoStart) {
+        finished = await typeWithTypo(el, speed);
+      } else {
+        finished = await typeElement(el, speed, token);
+      }
+
+      await sleep(140);
 
       if (!finished) return;
       if (token !== typeToken) return;
 
-      // SPECIAL pop behavior
+      // fullscreen pop
       if (el.dataset.pop === "true") {
         showLovePop(el.dataset.full || el.textContent);
       }
@@ -166,6 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (opened) return;
     opened = true;
 
+    // mark as seen for welcome back
+    localStorage.setItem("claireCardSeen", "1");
+    if (welcomeBackEl) welcomeBackEl.textContent = "welcome back 💕";
+
     card.classList.add("is-open");
     hint.textContent = "Keep clicking the heart to turn pages 💗";
     frontCover.style.pointerEvents = "none";
@@ -184,7 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
     typeWithin(giftSlides[giftIndex]);
   }
 
-  function revealGift() {
+  async function revealGift() {
+    showLoading();
+    await sleep(1200);
+    hideLoading();
+
     reveal.classList.add("show");
     reveal.setAttribute("aria-hidden", "false");
     hint.textContent = "Ok now we talkin.";
@@ -263,6 +368,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // stop fullscreen pop if active
     if (lovePopTimer) clearTimeout(lovePopTimer);
     if (lovePopEl) lovePopEl.classList.remove("show");
+
+    // hide loader if visible
+    hideLoading();
 
     // restore original text for typewriter
     document.querySelectorAll(".typewriter").forEach(el => {
