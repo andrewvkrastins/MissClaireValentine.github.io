@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingOverlay = document.getElementById("loadingOverlay");
 
   function sleep(ms) {
-    return new Promise(r => setTimeout(r, ms));
+    return new Promise((r) => setTimeout(r, ms));
   }
 
   function showLoading() {
@@ -74,6 +74,34 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => h.remove(), 950);
   });
 
+  // click "Love, Andrew" to reveal ps note
+  const frontSignature = document.getElementById("frontSignature");
+  const psNote = document.getElementById("psNote");
+
+  function togglePsNote() {
+    if (!psNote) return;
+    psNote.classList.toggle("show");
+    psNote.setAttribute(
+      "aria-hidden",
+      psNote.classList.contains("show") ? "false" : "true"
+    );
+  }
+
+  if (frontSignature) {
+    frontSignature.addEventListener("click", (e) => {
+      e.stopPropagation();
+      togglePsNote();
+    });
+
+    frontSignature.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePsNote();
+      }
+    });
+  }
+
   function ensureLovePop() {
     if (lovePopEl) return lovePopEl;
 
@@ -102,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (lovePopTimer) clearTimeout(lovePopTimer);
     lovePopTimer = setTimeout(() => {
       el.classList.remove("show");
-    }, 4500);
+    }, 5000); // <-- how long the big message stays
   }
 
   function rand(min, max) {
@@ -164,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     typeToken += 1;
     const token = typeToken;
 
-    targets.forEach(el => {
+    targets.forEach((el) => {
       if (!el.dataset.full) el.dataset.full = (el.textContent || "").trim();
       el.textContent = "";
     });
@@ -184,25 +212,27 @@ document.addEventListener("DOMContentLoaded", () => {
         await sleep(speed);
       }
 
-      await sleep(1000);
+      // pause before deleting (longer)
+      await sleep(900);
       if (token !== typeToken) return false;
 
-      // backspace wrong part
+      // backspace wrong part (slower)
       const backCount = fromText.length || 0;
       for (let b = 0; b < backCount; b++) {
         if (token !== typeToken) return false;
         el.textContent = el.textContent.slice(0, -1);
-        await sleep(100);
+        await sleep(90);
       }
 
-      await sleep(120);
+      // small pause
+      await sleep(220);
       if (token !== typeToken) return false;
 
-      // type corrected part
+      // type corrected part (slower)
       for (let t = 0; t < toText.length; t++) {
         if (token !== typeToken) return false;
         el.textContent += toText[t];
-        await sleep(145);
+        await sleep(110);
       }
 
       // keep final text for replay restores
@@ -212,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     for (const el of targets) {
-      let speed = (el.tagName === "H2" || el.tagName === "H3") ? 14 : 12;
+      let speed = el.tagName === "H2" || el.tagName === "H3" ? 14 : 12;
 
       if (el.dataset.speed) {
         const s = parseInt(el.dataset.speed, 10);
@@ -246,13 +276,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setNextLabel() {
-    nextBtn.textContent = (i === slides.length - 1) ? "Reveal plan 🎁" : "Next";
+    nextBtn.textContent = i === slides.length - 1 ? "Reveal plan 🎁" : "Next";
   }
 
   function showSlide(idx, opts = {}) {
     i = Math.max(0, Math.min(slides.length - 1, idx));
     slides.forEach((s, k) => s.classList.toggle("is-active", k === i));
-    prevBtn.disabled = (i === 0);
+    prevBtn.disabled = i === 0;
     setNextLabel();
     renderDots(dotsWrap, slides.length, i);
 
@@ -278,8 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
     giftIndex = Math.max(0, Math.min(giftSlides.length - 1, idx));
     giftSlides.forEach((s, k) => s.classList.toggle("is-active", k === giftIndex));
 
-    giftPrev.disabled = (giftIndex === 0);
-    giftNext.textContent = (giftIndex === giftSlides.length - 1) ? "Done 💘" : "Next";
+    giftPrev.disabled = giftIndex === 0;
+    giftNext.textContent =
+      giftIndex === giftSlides.length - 1 ? "Done 💘" : "Next";
 
     renderDots(giftDots, giftSlides.length, giftIndex);
     typeWithin(giftSlides[giftIndex]);
@@ -287,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function revealGift() {
     showLoading();
-    await sleep(5000);
+    await sleep(4000); // <-- loading screen duration
     hideLoading();
 
     reveal.classList.add("show");
@@ -351,16 +382,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showGiftSlide(giftIndex + 1);
   });
 
+  // Replay closes the card again (without breaking anything)
   reset.addEventListener("click", (e) => {
     e.stopPropagation();
-    opened = false;
-    i = 0;
-
-    card.classList.remove("is-open");
-    reveal.classList.remove("show");
-    reveal.setAttribute("aria-hidden", "true");
-    hint.textContent = "Click the heart 💌";
-    frontCover.style.pointerEvents = "auto";
 
     // stop typing
     typeToken += 1;
@@ -372,19 +396,40 @@ document.addEventListener("DOMContentLoaded", () => {
     // hide loader if visible
     hideLoading();
 
-    // restore original text for typewriter
-    document.querySelectorAll(".typewriter").forEach(el => {
-      if (el.dataset.full) el.textContent = el.dataset.full;
-    });
+    // hide reveal first
+    reveal.classList.remove("show");
+    reveal.setAttribute("aria-hidden", "true");
 
-    showSlide(0, { skipTypewriter: true });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // reset hint + allow cover clicks again
+    hint.textContent = "Click the heart 💌";
+    frontCover.style.pointerEvents = "auto";
+
+    // hide the ps note on replay
+    if (psNote) {
+      psNote.classList.remove("show");
+      psNote.setAttribute("aria-hidden", "true");
+    }
+
+    // scroll back to the heart so you see it close
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    // close the heart after a short moment (so animation is visible)
+    setTimeout(() => {
+      opened = false;
+      i = 0;
+
+      card.classList.remove("is-open");
+
+      // restore original text for typewriter
+      document.querySelectorAll(".typewriter").forEach((el) => {
+        if (el.dataset.full) el.textContent = el.dataset.full;
+      });
+
+      showSlide(0, { skipTypewriter: true });
+    }, 650);
   });
 
   // init
   showSlide(0, { skipTypewriter: true });
   renderDots(giftDots, giftSlides.length, 0);
 });
-
-
-
