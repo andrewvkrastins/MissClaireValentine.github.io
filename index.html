@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Miss Claire ❤</title>
-  <link rel="stylesheet" href="style.css?v=9" />
+  <link rel="stylesheet" href="style.css?v=10" />
 </head>
 
 <body>
@@ -26,6 +26,15 @@
   </svg>
 
   <div class="bg-hearts" aria-hidden="true"></div>
+
+  <!-- Floating hearts layer -->
+  <div class="floating-hearts" aria-hidden="true">
+    <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+    <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+  </div>
+
+  <!-- Simple timestamp -->
+  <div class="corner-stamp" aria-hidden="true">Valentine’s Day 2026</div>
 
   <main class="wrap">
     <header class="top">
@@ -78,10 +87,10 @@
                   <section class="slide">
                     <h2 class="paper-title typewriter">One of my favorites</h2>
                     <div class="photo-row one favorite-fit">
-  <figure class="photo photo-fit">
-    <img src="Photos/photo5.jpg" alt="Photo 3" />
-  </figure>
-</div>
+                      <figure class="photo photo-fit">
+                        <img src="Photos/photo5.jpg" alt="Photo 3" />
+                      </figure>
+                    </div>
                   </section>
 
                   <section class="slide">
@@ -150,7 +159,14 @@
             <div class="gift-emoji">🌷</div>
             <h3 class="gift-h typewriter">Flowers</h3>
             <p class="gift-p typewriter">And flowers. Because obviously.</p>
-            <p class="gift-p gift-bold typewriter">I love you, Claire Bear.</p>
+
+            <!-- SPECIAL LINE: slow type + fullscreen pop -->
+            <p
+              class="gift-p gift-bold typewriter"
+              id="bigLoveLine"
+              data-speed="26"
+              data-pop="true"
+            >I love you, Claire Bear.</p>
           </section>
         </div>
 
@@ -169,17 +185,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
