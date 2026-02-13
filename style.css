@@ -87,16 +87,71 @@ body{
   font-weight: 600;
 }
 
-/* soft background blobs */
+/* simple corner stamp */
+.corner-stamp{
+  position: fixed;
+  right: 12px;
+  bottom: 10px;
+  z-index: 20;
+  font-size: 12px;
+  color: rgba(106,74,91,.8);
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(255,77,136,.14);
+  padding: 6px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+/* soft background blobs (keep) */
 .bg-hearts{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.55;
+  opacity:.40;
   background-image:
     radial-gradient(circle at 20% 10%, rgba(255,77,136,.16) 0 22%, transparent 23%),
     radial-gradient(circle at 78% 18%, rgba(255,77,136,.12) 0 18%, transparent 19%),
     radial-gradient(circle at 44% 86%, rgba(255,77,136,.12) 0 20%, transparent 21%);
+}
+
+/* floating hearts */
+.floating-hearts{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floating-hearts span{
+  position: absolute;
+  bottom: -40px;
+  opacity: .18;
+  font-size: 22px;
+  filter: blur(.2px);
+  animation: floatUp linear infinite;
+  transform: translate3d(0,0,0);
+}
+
+.floating-hearts span:nth-child(1){ left: 6%;  font-size: 18px; animation-duration: 12s; animation-delay: 0s; }
+.floating-hearts span:nth-child(2){ left: 14%; font-size: 26px; animation-duration: 16s; animation-delay: 2s; }
+.floating-hearts span:nth-child(3){ left: 22%; font-size: 20px; animation-duration: 14s; animation-delay: 4s; }
+.floating-hearts span:nth-child(4){ left: 34%; font-size: 28px; animation-duration: 18s; animation-delay: 1s; }
+.floating-hearts span:nth-child(5){ left: 46%; font-size: 18px; animation-duration: 13s; animation-delay: 6s; }
+.floating-hearts span:nth-child(6){ left: 58%; font-size: 24px; animation-duration: 17s; animation-delay: 3s; }
+.floating-hearts span:nth-child(7){ left: 66%; font-size: 19px; animation-duration: 12.5s; animation-delay: 5s; }
+.floating-hearts span:nth-child(8){ left: 74%; font-size: 30px; animation-duration: 20s; animation-delay: 0.5s; }
+.floating-hearts span:nth-child(9){ left: 82%; font-size: 20px; animation-duration: 15s; animation-delay: 7s; }
+.floating-hearts span:nth-child(10){ left: 90%; font-size: 26px; animation-duration: 19s; animation-delay: 2.5s; }
+.floating-hearts span:nth-child(11){ left: 40%; font-size: 16px; animation-duration: 11.5s; animation-delay: 8s; }
+.floating-hearts span:nth-child(12){ left: 52%; font-size: 22px; animation-duration: 16.5s; animation-delay: 9s; }
+
+@keyframes floatUp{
+  0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity: .10; }
+  12%{ opacity: .20; }
+  50%{ transform: translateY(-55vh) translateX(18px) rotate(180deg); }
+  100%{ transform: translateY(-110vh) translateX(-18px) rotate(360deg); opacity: 0; }
 }
 
 /* Heart card */
@@ -113,6 +168,8 @@ body{
 
   display:grid;
   place-items:center;
+  position: relative;
+  z-index: 2;
 }
 
 /* pulse while closed */
@@ -310,6 +367,7 @@ body{
   background: rgba(255,77,136,.12);
   color: var(--ink);
   cursor:pointer;
+  transition: box-shadow 180ms ease, transform 180ms ease, background 180ms ease;
 }
 
 .nav-btn.primary{
@@ -320,6 +378,16 @@ body{
 .nav-btn:disabled{
   opacity:.5;
   cursor:not-allowed;
+  box-shadow: none;
+}
+
+/* button glow */
+.nav-btn:not(:disabled):hover{
+  box-shadow: 0 0 0 3px rgba(255,77,136,.16), 0 16px 32px rgba(255,77,136,.18);
+  transform: translateY(-1px);
+}
+.nav-btn.primary:not(:disabled):hover{
+  box-shadow: 0 0 0 3px rgba(255,77,136,.22), 0 18px 36px rgba(255,77,136,.26);
 }
 
 .dots{
@@ -346,6 +414,8 @@ body{
   display:none;
   justify-content:center;
   padding: 18px 0 0;
+  position: relative;
+  z-index: 3;
 }
 .reveal.show{
   display:flex;
@@ -448,6 +518,46 @@ body{
     transform: translate3d(var(--dx), 110vh, 0) rotate(var(--rot));
     opacity: 0;
   }
+}
+
+/* Fullscreen love pop */
+.love-pop{
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: rgba(255, 77, 136, .22);
+  backdrop-filter: blur(10px);
+}
+
+.love-pop.show{
+  display: flex;
+  animation: loveFadeIn 220ms ease-out forwards;
+}
+
+.love-pop .love-text{
+  font-weight: 950;
+  letter-spacing: .2px;
+  color: #2b1b24;
+  font-size: clamp(40px, 7vw, 86px);
+  text-shadow: 0 18px 60px rgba(0,0,0,.18);
+  animation: lovePunch 2000ms ease-in-out forwards;
+}
+
+@keyframes loveFadeIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
+@keyframes lovePunch{
+  0%{ transform: scale(.95); opacity: .0; }
+  10%{ transform: scale(1.02); opacity: 1; }
+  70%{ transform: scale(1.02); opacity: 1; }
+  100%{ transform: scale(1); opacity: 0; }
 }
 
 /* Mobile */
