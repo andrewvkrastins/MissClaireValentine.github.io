@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Miss Claire ❤</title>
-  <link rel="stylesheet" href="style.css?v=10" />
+  <link rel="stylesheet" href="style.css?v=12" />
 </head>
 
 <body>
@@ -30,8 +30,8 @@
   <!-- Floating hearts layer -->
   <div class="floating-hearts" aria-hidden="true">
     <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
-  <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
-  <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+    <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
+    <span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span><span>❤</span>
   </div>
 
   <!-- Simple timestamp -->
@@ -40,7 +40,7 @@
   <main class="wrap">
     <header class="top">
       <div class="pill">Happy Valentine’s Day</div>
-      <h1 class="title"></h1>
+      <h1 class="title">For <span id="herName">Claire</span> 💖</h1>
       <p class="subtitle">Click the heart to open, then keep clicking to turn pages.</p>
     </header>
 
@@ -69,7 +69,7 @@
                     <h2 class="paper-title typewriter">I appreciate you</h2>
                     <p class="paper-text typewriter">
                       You make me so happy. You’re my favorite person, and I’m grateful for you every day.
-                      I'm extremly proud that I get to be with you and I hope we keep growing together.
+                      I'm extremely proud that I get to be with you and I hope we keep growing together.
                       I just know this is going to be the best year yet. Happy Valentines Day❤️
                     </p>
                     <p class="paper-text typewriter">
@@ -89,7 +89,7 @@
                     <h2 class="paper-title typewriter">One of my favorites</h2>
                     <div class="photo-row one favorite-fit">
                       <figure class="photo photo-fit">
-                        <img src="Photos/photo5.jpg" alt="Photo 3" />
+                        <img src="Photos/photo5.jpg" alt="Favorite photo" />
                       </figure>
                     </div>
                   </section>
@@ -129,6 +129,7 @@
               <div class="front-center">
                 <div class="front-title">Miss Claire <span class="front-heart">❤</span></div>
                 <div class="front-sub">Love, Andrew</div>
+                <div class="welcome-back" id="welcomeBack"></div>
               </div>
             </div>
           </div>
@@ -146,7 +147,7 @@
         <div class="gift-slider">
           <section class="gift-slide is-active">
             <div class="gift-emoji">🧘‍♀️</div>
-            <h3 class="gift-h typewriter">Lava yoga</h3>
+            <h3 class="gift-h typewriter">Hot yoga</h3>
             <p class="gift-p typewriter">Morning class together. Stretch. Sweat. Laugh at me struggling.</p>
           </section>
 
@@ -161,12 +162,15 @@
             <h3 class="gift-h typewriter">Flowers</h3>
             <p class="gift-p typewriter">And flowers. Because obviously.</p>
 
-            <!-- SPECIAL LINE: slow type + fullscreen pop -->
+            <!-- Typo -> correction -> fullscreen pop -->
             <p
               class="gift-p gift-bold typewriter"
               id="bigLoveLine"
               data-speed="26"
               data-pop="true"
+              data-typo-start="I love you Miss Claire"
+              data-typo-from="Miss Claire"
+              data-typo-to="Claire Bear"
             >I love you, Claire Bear.</p>
           </section>
         </div>
@@ -186,7 +190,14 @@
     </footer>
   </main>
 
-  <script src="script.js?v=10"></script>
+  <!-- loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+    <div class="loading-card">
+      <div class="loading-title">Calculating the perfect date</div>
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <script src="script.js?v=12"></script>
 </body>
 </html>
-
